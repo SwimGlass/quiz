@@ -9,19 +9,22 @@ char smallest_character(int num, int c)
     int tmp = num;
     int checkbit = c - 97;
     if( 1 & (tmp >> checkbit)){ //find character , output next
-        while((tmp & 1) == 0){ 
+        /*while((tmp & 1) == 0){ 
             tmp = tmp >> 1;
             checkbit++;
         }
         checkbit++;
-        return (checkbit+97);
+        return (checkbit+97);*/
+        int cc = 1 << checkbit;
+        return (__builtin_ctz((num>>(__builtin_ctz(cc)+1)<<(__builtin_ctz(cc)+1)))+97);
     }
     else{// no find character , output min
-        while((tmp & 1)==0){
+        /*while((tmp & 1)==0){
             tmp = tmp >> 1;
             checkbit++;
         }
-        return (checkbit+97);
+        return (checkbit+97);*/
+        return (__builtin_ctz(num)+97);
     }
 }
 
