@@ -8,14 +8,16 @@
 int checkbit;
 char smallest_character(int num, int c){
     if( (num & c) ==0 ){ 
-        checkbit++;
-        return(smallest_character((num>>1),1));
+        //checkbit++;
+        return (__builtin_ctz(num)+97);
+        //return(smallest_character((num>>1),1));
     }
     
-    if((num & c)==1)return(checkbit+97); 
+    //if((num & c)==3)return(checkbit+97); 
     
     if((num & c) > 0){
         int a = c;
+        /*
         int i = 0;
         while((a & 1)==0){ 
             i++;
@@ -23,6 +25,8 @@ char smallest_character(int num, int c){
         }
         i++;
         return(smallest_character(((num >> i) << i),1));
+        */
+        return(smallest_character(((num>>(__builtin_ctz(c)+1))<<(__builtin_ctz(c)+1)),1));
     }
 }
 int main()
